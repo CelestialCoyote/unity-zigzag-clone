@@ -7,10 +7,13 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rigidbody;
 	private bool walkingRight = true;
+	public Transform rayStart;
+	private Animator animator;
 
 	void Awake()
 	{
 		rigidbody = GetComponent<Rigidbody>();
+		animator = GetComponent<Animator>();
 	}
 
 	private void FixedUpdate()
@@ -23,6 +26,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
 		{
 			Switch();
+		}
+
+		RaycastHit hit;
+
+		if (!Physics.Raycast(rayStart.position, -transform.up, out hit, Mathf.Infinity))
+		{
+			animator.SetTrigger("isFalling");
 		}
     }
 
