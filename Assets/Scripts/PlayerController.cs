@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+	public Transform rayStart;
+	public GameObject crystalEffect;
     private Rigidbody rigidbody;
 	private bool walkingRight = true;
-	public Transform rayStart;
 	private Animator animator;
 	private GameManager gameManager;
 
@@ -63,8 +64,12 @@ public class PlayerController : MonoBehaviour
 	{
 		if (other.tag == "Crystal")
 		{
-			Destroy(other.gameObject);
+			GameObject effect = Instantiate(crystalEffect, rayStart.transform.position, Quaternion.identity);
+			
 			gameManager.IncreaseScore();
+			
+			Destroy(effect, 2);
+			Destroy(other.gameObject);
 		}	
 	}
 }
