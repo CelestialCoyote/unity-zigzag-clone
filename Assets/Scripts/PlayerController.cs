@@ -39,9 +39,9 @@ public class PlayerController : MonoBehaviour
 		RaycastHit hit;
 
 		if (!Physics.Raycast(rayStart.position, -transform.up, out hit, Mathf.Infinity))
-		{
 			animator.SetTrigger("isFalling");
-		}
+		else
+			animator.SetTrigger("notFallingYet");
 
 		if (transform.position.y < -2)
 			gameManager.EndGame();
